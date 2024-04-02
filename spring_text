@@ -1,0 +1,18 @@
+1. sts3 설치 >> workspace만들기 >> 브라우저 설정 >> server삭제 >> preference >> general,web >> utf-8설정 
+2. lombok설치 >> 경로 >> sts.exe >> install
+3. tomcat 서버 연결
+4. maven repository >> spring context >> 5.3.28 >> maven복붙 >> ppt25페이지빌드복붙 >> run as >> maven install
+
+- 사용자 >> admin >> .m2삭제 >> pom.xml이 자동으로 만듬
+
+- bean >> singletone 패턴
+
+- bean 등록 어노테이션
+-- 클래스 >> @Componet(빈등록), @Service(aop가능), @Repository(db연동), @Controller(라우팅가능)
+-- 특정필드 >> @Autowired(객체찾아자동할당) - 의존성주입
+
+- 스프링 MVC 구조
+-- dispatcherServlet = 중간 역할
+-- handlerMapping = 주소 연결
+-- handlerAdapter = getParameter역할+jsp호출역할 대신, 컨트롤러 연결, request-response데이터 미리파싱,
+-- viewResolver = 서블릿 찾기
