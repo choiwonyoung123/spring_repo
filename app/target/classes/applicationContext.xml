@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace >> context추가 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+	<!-- xml 방식 >> 외부에서 들여와서 사용할 때 -->
+	<!-- id = 이름(고유) , class = 실제 class 이름 -->
+	<!-- 하나의 bean 등록 >> null 예외 발생x -->
+	<bean id="tv" class="com.yedam.spring.TV"/>
+	<!-- >> 주입되는 대상 순서 중요 >> 주입되는 대상 property, getter/setter필요 -->
+	<bean id="cf" class="com.yedam.spring.xml.Chef"/>
+	<!-- property를 가지는 경우 id 정의x -->
+	<!-- singletone 패턴 정의 -->
+	<bean class="com.yedam.spring.xml.Restaurant">	
+		<property name="chef" ref="cf"></property><!-- ref >> 컨테이너에 들어있는 bean 중에 하나를 찾기 >> name과 같게쓰기 -->
+	</bean>
+	
+	
+	<!-- 어노테이션 방식 >> 직접 클래스를 만들어서 사용할 때 -->
+	<!-- 한번에 등록 >> 등록된 경로 밑으로만 검색 -->
+	<context:component-scan base-package="com.yedam.spring"/>
+</beans>
