@@ -37,5 +37,4 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		return "home"; //home.jsp 반환, requseDispatcher ~ forward 대신하는 역할
 	}
-	
 }

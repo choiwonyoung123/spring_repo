@@ -8,8 +8,11 @@
 		<setting name="jdbcTypeForNull" value="VARCHAR" />
 	</settings>
 	<typeAliases>
-		<package name="com.yedam.java.emp.service" />
+		<package name="com.yedam.java" />
 	</typeAliases>
+	<!-- 날짜 처리 -->
+	<!-- java.util.Date 클래스와 java.sql.Date 클래스 차이 -->
+	<!-- resultSet >> java.sql.Date 클래스 -->
 	<typeHandlers>
 		<typeHandler javaType="java.sql.Date"
 			handler="org.apache.ibatis.type.DateTypeHandler" />

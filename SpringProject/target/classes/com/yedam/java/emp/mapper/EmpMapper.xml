@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- dtd 설정 >> window - preference >> xml - template >> new - new dtd -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper태그 >> 네임스페이스 >> 매퍼 정의 -->
+<mapper namespace="com.yedam.java.emp.mapper.EmpMapper">
+	<select id="selectEmpAll" resultType="EmpVO">
+		select employee_id,
+		       last_name,
+		       email,
+		       hire_date,
+		       job_id
+		from   employees
+		order by employee_id
+	</select>
+</mapper>

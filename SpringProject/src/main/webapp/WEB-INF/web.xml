@@ -10,6 +10,7 @@
 		<param-value>/WEB-INF/spring/*-context.xml</param-value>
 	</context-param>
 
+	<!-- web.xml 읽어들임 -->
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -32,6 +33,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<!-- 인코딩 방법 미리 지정 -->
 	<!-- filter -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

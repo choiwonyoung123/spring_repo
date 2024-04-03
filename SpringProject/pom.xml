@@ -82,7 +82,8 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-
+		
+		<!-- jdbc 설정 -->
 		<!-- log4jdbc-log4j2-jdbc4.1 -->
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
@@ -149,28 +150,32 @@
 			<version>2.13.4</version>
 		</dependency>
 
-		<!-- DB -->
 
+
+		<!-- DB -->
+		<!-- jdbc 설정 -->
 		<!-- ojdbc8 -->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>21.7.0.0</version>
 		</dependency>
-
+		<!-- jdbc 설정 -->
 		<!-- spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
+		<!-- db관련 설정 -->
 		<!-- HikariCP -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 			<version>5.0.1</version>
 		</dependency>
+
+
 
 		<!-- mybatis관련 -->
 		<!-- mybatis -->

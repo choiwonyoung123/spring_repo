@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- xml파일 생성시 dtd 확인 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- xml파일 모음 -->
+<!-- select >> id, resultType -->
+<!-- insert,update,delete >> id, parameterType -->
+<mapper namespace="com.yedam.app.emp.mapper.EmpMapper"><!-- 네임스페이스 >> mapper 패키지명 + mapper 클래스명 -->
+	<!-- 전체조회 -->
+	<select id="" resultType="">
+		
+	</select>
+	<!-- 단건조회 -->
+	<select id="" resultType="">
+		
+	</select>
+	<!-- 등록 -->
+	<insert id="" parameterType="">
+		
+	</insert>
+	<!-- 수정 -->
+	<update id="" parameterType="">
+		
+	</update>
+	<!-- 삭제 -->
+	<delete id="" parameterType="">
+		
+	</delete>
+</mapper>

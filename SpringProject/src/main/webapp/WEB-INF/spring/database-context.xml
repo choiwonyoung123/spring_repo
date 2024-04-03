@@ -5,16 +5,18 @@
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!-- jdbc는 외부 라이브러리이기 때문에 xml 방식 bean 등록 -->
+
 	<!-- datasource connection pool -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
 		<property name="jdbcUrl"
 			value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<!-- 데이터베이스 아이디/비밀번호 -->
 		<property name="username" value="hr" />
 		<property name="password" value="hr" />
 	</bean>
-
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
@@ -25,7 +27,9 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 	</bean>
-
+	
+	<!-- 매퍼 읽어들이는 방식 정의 -->
+	<!-- 매퍼 전용 bean >> 마이바티스.xml에 매퍼 추가하는것 대신하는 역할 -->
 	<!-- mapper scan -->
 	<mybatis-spring:scan
 		base-package="com.yedam.java.**.mapper" />
