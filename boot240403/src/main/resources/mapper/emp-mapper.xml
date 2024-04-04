@@ -5,26 +5,106 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- xml파일 모음 -->
 <!-- select >> id, resultType -->
-<!-- insert,update,delete >> id, parameterType -->
+<!-- insert,update,delete >> id, parameterType, 반환결과가 무조건 int타입 -->
 <mapper namespace="com.yedam.app.emp.mapper.EmpMapper"><!-- 네임스페이스 >> mapper 패키지명 + mapper 클래스명 -->
-	<!-- 전체조회 -->
-	<select id="" resultType="">
-		
+	<!-- 전체조회, 정렬해서 일정한 순서 유지 -->
+	<select id="selectEmpAll" resultType="EmpVO">
+		SELECT employee_id
+		       ,first_name
+		       ,last_name
+		       ,email
+		       ,phone_number
+		       ,hire_date
+		       ,job_id
+		       ,salary
+		       ,commission_pct
+		       ,manager_id
+		       ,department_id
+		FROM   employees
+		ORDER BY employee_id
 	</select>
 	<!-- 단건조회 -->
-	<select id="" resultType="">
-		
+	<select id="selectEmp" resultType="EmpVO">
+		SELECT employee_id
+		       ,first_name
+		       ,last_name
+		       ,email
+		       ,phone_number
+		       ,hire_date
+		       ,job_id
+		       ,salary
+		       ,commision_pct
+		       ,manager_id
+		       ,department_id
+		FROM   employees
+		WHERE  employee_id = #{employeeId}
+		ORDER BY employee_id
 	</select>
 	<!-- 등록 -->
-	<insert id="" parameterType="">
-		
+	<!-- selectkey >> 숫자 자동 부여, 파라미터에 값이 담김 -->
+	<!-- selectkey >> keyproperty=실제 필드명, order=쿼리 실행전/실행후 설정 -->
+	<!--  if태그를 사용해서 insert하는 경우 필드와 밸류 모두 태그를 추가 -->
+	<!-- where태그, set태그 >> if와 함께 사용시 조건이 false면 생성x -->
+	<insert id="insertEmp" parameterType="EmpVO">
+		<selectKey keyProperty="employeeId"
+		           resultType="Integer"
+		           order="BEFORE">
+			SELECT NVL(MAX(employee_id),0)+1
+			FROM   employees
+		</selectKey>
+			INSERT INTO employees
+				(
+		   			employee_id
+		    		,last_name
+		    		,email
+		    		,hire_date
+		    		<if test="jobId != null and !jobId.equals('')">
+		    			,job_id
+		    		</if>
+		    		<if test="salary > 0">
+		    			,salary
+		    		</if> 
+				)
+			values
+			(
+				#{employeeId}
+				,#{lastName}
+				,#{email}
+				<choose>
+					<when test="hireDate != null">
+						,#{hireDate}
+					</when>
+					<otherwise>
+						,sysdate
+					</otherwise>
+				</choose>
+				<if test="jobId != null and !jobId.equals('')">
+					,#{jobId}
+				</if>
+				<if test="salary > 0">
+					,#{salary}
+				</if>
+			) 
 	</insert>
 	<!-- 수정 -->
-	<update id="" parameterType="">
-		
+	<update id="updateEmp" parameterType="EmpVO">
+		UPDATE employees
+		SET last_name = #{lastName}
+		<if test="email != null and !email.equals('')">
+			,email = #{email}
+		</if>
+		<if test="hireDate != null">
+			,hire_date = #{hireDate}
+		</if>
+		<if test="salary > 0">
+			,salary = #{salary}
+		</if>
+		WHERE employee_id = #{employeeId}
 	</update>
 	<!-- 삭제 -->
-	<delete id="" parameterType="">
-		
+	<delete id="deleteEmp" parameterType="int">
+		DELETE FROM employees
+		WHERE employee_id = #{eid}
 	</delete>
+	
 </mapper>
