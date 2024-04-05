@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"><!-- 타임리프 라이브러리 추가 -->
+<head>
+<meta charset="UTF-8">
+<title>전체 사원 조회</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>사원번호</th>
+				<th>이름</th>
+				<th>입사일자</th>
+				<th>업무</th>
+			</tr>
+		</thead>
+		<tbody>
+			<th:block th:each="empInfo, idxStat : ${empList}"><!-- 타임리프 유일한 태그 >> 돔x --><!-- each >> "변수,stat:배열" -->
+				<tr th:id="${idxStat.index}" th:onclick="|location.href='@{/empInfo(employeeId=${empInfo.employeeId},lastName=${empInfo.lastName})}'|"><!-- tr태그에 id값을 인덱스로 차례대로 부여 --><!-- 링크 표현식 사용 @{/경로(키=값,키=값)} >> 타임리프를 사용할때 location.href내용이 문자열이 아님. 그래서 파이프라인으로 문자열을 감싸야 함 -->
+					<td th:text="${empInfo.employeeId}"/><!-- 방법1 -->
+					<td>[[ ${empInfo.lastName} ]]</td><!-- 방법2 -->
+					<td th:text="${#dates.format(empInfo.hireDate,'yyyy년MM월dd일')}"/><!-- 날짜데이터포맷 >> ${#dates.format(date, ' ')} -->
+					<td th:text="${empInfo.jobId}"/>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>	
+</body>
+</html>

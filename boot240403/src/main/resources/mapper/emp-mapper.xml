@@ -33,7 +33,7 @@
 		       ,hire_date
 		       ,job_id
 		       ,salary
-		       ,commision_pct
+		       ,commission_pct
 		       ,manager_id
 		       ,department_id
 		FROM   employees

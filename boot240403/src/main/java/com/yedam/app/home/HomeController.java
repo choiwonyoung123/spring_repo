@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,13 +27,15 @@ public class HomeController {
 	// method >> 상관없음
 	// content-type >> application/x-www-form-urlencoded
 	@RequestMapping(path="comobj", method= {RequestMethod.GET, RequestMethod.POST}) // 기본 >> path,method 필수
-	@ResponseBody
-	public String commandObject(EmpVO empVO) {
+	//@ResponseBody
+	public String commandObject(@ModelAttribute("emp")EmpVO empVO) { //moderAttribute >> 데이터 넘기기(객체)
 		log.info("path: /comobj");
 		log.info("= employee_id: " + empVO.getEmployeeId());
 		log.info("= last_name: " + empVO.getLastName());
 		log.info(empVO.toString());
-		return "";
+		return "home"; //home.html 호출 >> thymleaf(resources/templates)
+		//classpath:/templates/home.html
+		//templates 밑에 폴더 밑에 파일 만든 경우 >> return 값으로 "폴더명/파일명"
 	}
 	// -- 쿼리 스트링 --
 	@RequestMapping(path="reqparm", method= {RequestMethod.GET, RequestMethod.POST})
@@ -58,6 +61,8 @@ public class HomeController {
 	}
 	// -- rest --
 	@PostMapping("resbody") // post,put
+	//페이지 없이 데이터만 받기
+	//ajax,fetch 할때 주로 사용 >> @responsebody 어노테이션 사용
 	@ResponseBody // json데이터포맷
 	public Map<String, Object> requestBody(@RequestBody EmpVO empVO) {
 		Map<String, Object> map = new HashMap<>();
