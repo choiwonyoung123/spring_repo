@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>사원 정보 조회</title>
+</head>
+<body>
+	<div>
+		<div>
+			<label>부서번호<input type="text" th:value="${deptInfo.departmentId}" readonly></label><!-- 타임리프 사용 >> moder = empInfo -->
+		</div>
+		<div>
+			<label>부서이름<input type="text" th:value="${deptInfo.departmentName}" readonly></label>
+		</div>
+		<div>
+			<label>위치<input type="text" th:value="${deptInfo.location}" readonly></label>
+		</div>
+	</div>
+	<div>
+		<button type="button" th:onclick="|location.href='@{/deptList}'|">목록</button><!-- 링크 표현식 사용 @{/경로(키=값,키=값)} >> 타임리프를 사용할때 location.href내용이 문자열이 아님. 그래서 파이프라인으로 문자열을 감싸야 함 -->
+		<!--<button type="button" th:onclick="location.href='/empList"></button>-->
+	</div>
+</body>
+</html>
