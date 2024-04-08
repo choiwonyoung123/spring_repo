@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.yedam.app.dept.mapper.DeptMapper">
+  	<select id="selectDeptAll" resultType="DeptVO">
+  		SELECT department_id
+  		       ,department_name
+  		       ,location
+  		FROM   departments
+  		ORDER BY department_id
+  	</select>
+  	<select id="selectDept" resultType="DeptVO">
+  		SELECT department_id
+  		       ,department_name
+  		       ,location
+  		FROM   departments
+  		WHERE  department_id = #{departmentId}
+  		ORDER BY department_id
+  	</select>
+  	<insert id="insertDept" parameterType="DeptVO">
+		<selectKey keyProperty="departmentId"
+		           resultType="Integer"
+		           order="BEFORE">
+			SELECT NVL(MAX(department_id),0)+1
+			FROM   departments
+		</selectKey>
+			INSERT INTO departments
+				(
+		   			department_id
+		    		,department_name
+		    		,location
+		    		<!--
+		    		,hire_date
+		    		<if test="jobId != null and !jobId.equals('')">
+		    			,job_id
+		    		</if>
+		    		<if test="salary > 0">
+		    			,salary
+		    		</if>--> 
+				)
+			values
+			(
+				#{departmentId}
+				,#{departmentName}
+				,#{location}
+				<!--
+				<choose>
+					<when test="hireDate != null">
+						,#{hireDate}
+					</when>
+					<otherwise>
+						,sysdate
+					</otherwise>
+				</choose>
+				<if test="jobId != null and !jobId.equals('')">
+					,#{jobId}
+				</if>
+				<if test="salary > 0">
+					,#{salary}
+				</if>-->
+			) 
+	</insert>
+  </mapper>
