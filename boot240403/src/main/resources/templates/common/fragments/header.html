@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<!-- header 부분 fragment 조각 -->
+<th:block th:fragment="HeaderFragment">
+<ul class="nav justify-content-center">
+  	<li class="nav-item">
+    	<a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
+  	</li>
+  	<li class="nav-item">
+   		<a class="nav-link" th:href="@{/empList}">전체조회</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" th:href="@{/empInsert}">등록</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  	</li>
+</ul>
+</th:block>
+</html>

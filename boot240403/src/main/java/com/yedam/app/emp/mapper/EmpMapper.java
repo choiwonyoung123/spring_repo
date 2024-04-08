@@ -23,4 +23,6 @@ public interface EmpMapper {
 	//마이바티스 >> @Param >> 매개변수 이름 지정 >> 여러개면 각각 지정
 	//public int deleteEmp(@Param("eid")int employeeId);
 	
+	// 등록할 사원번호 조회
+	public EmpVO getEmpId();
 }

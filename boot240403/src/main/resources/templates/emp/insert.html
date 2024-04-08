@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="~{common/layouts/default_layout}" 
+      layout:fragment="content">
 <head>
 <meta charset="UTF-8">
 <title>사원 등록</title>
 </head>
 <body>
-	<form th:action="@{/empInsert}" method="post" th:object="${empVO}"><!-- name, value 속성x --><!-- 타임리프로 객체 생성해서 보내줌 --><!-- 객체 안에 있는 데이터 가져옴 -->
+	<form name="insertForm" th:action="@{/empInsert}" method="post" th:object="${empVO}"><!-- name, value 속성x --><!-- 타임리프로 객체 생성해서 보내줌 --><!-- 객체 안에 있는 데이터 가져옴 -->
 		<div>
 			<label>사원번호<input type="text" th:field="*{employeeId}" readonly></label><!-- 타임리프 >> *{ } >> 객체 안 필드 선택 >> 해당 필드에 대한 name,value,필드값 부여 -->
 		</div>
@@ -28,4 +30,34 @@
 			<button type="submit">등록</button><!-- 링크 표현식 사용 @{/경로(키=값,키=값)} >> 타임리프를 사용할때 location.href내용이 문자열이 아님. 그래서 파이프라인으로 문자열을 감싸야 함 -->
 		</div>
 	</form>
+	<script>
+		document.querySelector('form[name="insertForm"]').addEventListener('submit', validationCheck);
+		function validationCheck(event){ // 이벤트객체 필요 >> 일시적 막기
+			event.preventDefault(); // 이벤트 막기
+			
+			let name = document.getElementById('lastName');
+			if(name.value == ''){ // 공백 기준, null undefine x
+				alert('사원이름은 필수로 입력해야 합니다.');
+				name.focut(); // 해당 요소 커서
+				return; // 메소드 종료
+			}
+			
+			let email = document.getElementById('email');
+			if(email.value == ''){ // 공백 기준, null undefine x
+				alert('이메일은 필수로 입력해야 합니다.');
+				email.focut(); // 해당 요소 커서
+				return; // 메소드 종료
+			}
+			
+			let jobId = document.getElementById('jobId');
+			if(jobId.value == ''){ // 공백 기준, null undefine x
+				alert('직무는 필수로 입력해야 합니다.');
+				jobId.focut(); // 해당 요소 커서
+				return; // 메소드 종료
+			}
+			
+			insertForm.submit(); // submit 실행
+		};
+	</script>
+</body>
 </html>

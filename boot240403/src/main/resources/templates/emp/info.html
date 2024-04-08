@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="~{common/layouts/default_layout}" 
+      layout:fragment="content">
 <head>
 <meta charset="UTF-8">
 <title>사원 정보 조회</title>
@@ -29,6 +31,8 @@
 	<div>
 		<button type="button" th:onclick="|location.href='@{/empList}'|">목록</button><!-- 링크 표현식 사용 @{/경로(키=값,키=값)} >> 타임리프를 사용할때 location.href내용이 문자열이 아님. 그래서 파이프라인으로 문자열을 감싸야 함 -->
 		<!--<button type="button" th:onclick="location.href='/empList"></button>-->
+		<button type="button" th:onclick="|location.href='@{/empUpdate(employeeId=${empInfo.employeeId})}'|">수정</button><!-- 파라미터 넘기기 -->
+		<button type="button" th:onclick="|location.href='@{/empDelete(employeeId=${empInfo.employeeId})}'|">삭제</button><!-- 파라미터 넘기기 -->
 	</div>
 </body>
 </html>

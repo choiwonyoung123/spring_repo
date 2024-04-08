@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- thymeleaf + thymeleaf layout dialect -->
+<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- config/헤드부분 교체 및 불러오기 --><!-- 파일경로 :: fragment명 -->
+<head th:replace="common/configs/config :: ConfigFragment"></head>
+<body>
+	<!-- header -->
+	<header>
+		<!-- fragments/헤더부분 교체 및 불러오기 --><!-- 파일경로 :: fragment명 -->
+		<th:block th:replace="common/fragments/header :: HeaderFragment"></th:block>
+	</header>
+	<!-- content -->
+	<main>
+		<th:block layout:fragment="content"></th:block>
+	</main>
+	<!-- footer -->
+	<footer>
+		<th:block th:replace="common/fragments/footer :: FooterFragment"></th:block>
+	</footer>
+</body>
+</html>

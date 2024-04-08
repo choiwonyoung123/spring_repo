@@ -46,12 +46,12 @@
 	<!--  if태그를 사용해서 insert하는 경우 필드와 밸류 모두 태그를 추가 -->
 	<!-- where태그, set태그 >> if와 함께 사용시 조건이 false면 생성x -->
 	<insert id="insertEmp" parameterType="EmpVO">
-		<selectKey keyProperty="employeeId"
+		<!-- <selectKey keyProperty="employeeId"
 		           resultType="Integer"
 		           order="BEFORE">
 			SELECT NVL(MAX(employee_id),0)+1
 			FROM   employees
-		</selectKey>
+		</selectKey> -->
 			INSERT INTO employees
 				(
 		   			employee_id
@@ -106,5 +106,8 @@
 		DELETE FROM employees
 		WHERE employee_id = #{eid}
 	</delete>
-	
+	<select id="getEmpId" resultType="EmpVO">
+		SELECT NVL(MAX(employee_id),0) + 1 as employee_id
+		FROM employees
+	</select>
 </mapper>

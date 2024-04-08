@@ -1,12 +1,16 @@
 package com.yedam.app.emp.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.app.emp.service.EmpService;
 import com.yedam.app.emp.service.EmpVO;
@@ -43,7 +47,8 @@ public class EmpController {
 	// <<등록 페이지>>
 	@GetMapping("empInsert") // GET 방식 정의, 경로 - empInsert
 	public String empInsertForm(Model model) { // 모델필요
-		model.addAttribute("empVO", new EmpVO()); // empInsertProcess로 데이터 이동
+		EmpVO empVO = empService.getEmpId(); // 등록할 사원번호 미리 가져와서 객체에 추가
+		model.addAttribute("empVO", empVO); // empInsertProcess로 데이터 이동
 		return "emp/insert";
 	}
 	
@@ -59,5 +64,36 @@ public class EmpController {
 			uri = "empList";
 		}
 		return uri;
+	}
+	
+	// <<수정 페이지>>
+	@GetMapping("empUpdate")
+	public String empUpdateForm(@RequestParam Integer employeeId, Model model) {
+		EmpVO empVO = new EmpVO(); // 인스턴스 생성
+		empVO.setEmployeeId(employeeId); // 객체에 파라미터 값 추가
+		EmpVO findVO  = empService.empInfo(empVO);
+		model.addAttribute("empInfo", findVO);
+		return "emp/update";
+	}
+	
+	// <<수정 처리>> ajax > queryString
+	@PostMapping("empUpdate")
+	@ResponseBody // ajax할때 필요
+	public Map<String, Object> empUpdateProcess(EmpVO empVO) {
+		return empService.empUpdate(empVO);
+	}
+	
+	// <<수정 처리>> ajax(@ResponseBody) / json(@RequestBody)
+//	@PostMapping("empUpdate")
+//	@ResponseBody // ajax할때 필요
+//	public Map<String, Object> empUpdateProcessAjax(@RequestBody EmpVO empVO) {
+//		return empService.empUpdate(empVO);
+//	}
+	
+	// <<삭제>>
+	@GetMapping("empDelete")
+	public String empDelete(EmpVO empVO) {
+		empService.empDelete(empVO);
+		return "redirect:empList"; //empList 페이지로 돌아가기
 	}
 }

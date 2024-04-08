@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org"><!-- 타임리프 라이브러리 추가 -->
+<!-- 타임리프 라이브러리 추가 --><!-- layout 라이브러리 --><!-- layout 경로 --><!-- fragment명 -->
+<html xmlns:th="https://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="~{common/layouts/default_layout}" 
+      layout:fragment="content">
 <head>
 <meta charset="UTF-8">
 <title>전체 사원 조회</title>

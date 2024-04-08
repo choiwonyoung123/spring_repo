@@ -15,4 +15,6 @@ public interface EmpService {
 	public Map<String, Object> empUpdate(EmpVO empVO);
 	//삭제 - 사원삭제
 	public Map<String, Object> empDelete(EmpVO empVO);
+	//등록할 사원 번호 조회
+	public EmpVO getEmpId();
 }
