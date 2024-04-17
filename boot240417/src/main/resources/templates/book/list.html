@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<div class="container">
+	<h3>도서 조회/수정</h3>
+	<table style="border: 1px solid black;" class="table">
+		<thead>
+			<tr>
+				<th>도서번호</th>
+				<th>도서명</th>
+				<th>표지</th>
+				<th>출판일자</th>
+				<th>금액</th>
+				<th>출판사</th>
+				<th>도서소개</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="info : ${books}"><!-- 타임리프 반복문 = each 붙여서 사용, "임의변수 : ${받아온값}" -->
+				<td>[[${info.bookNo}]]</td><!-- BookVO 필드 값 가져오기 -->
+				<td>[[${info.bookName}]]</td>
+				<td><img style="width:100px; height:100px;" th:src="@{/images/{fileName}(fileName=${info.bookCoverimg})}"></td><!-- static 폴더 >> fileName 변수 = info.bookCoverimg 출력 -->
+				<td>[[${#dates.format(info.bookDate, 'yyyy년 MM월 dd일')}]]</td>
+				<td>[[${#numbers.formatInteger(info.bookPrice, 3, 'COMMA')}]]</td>
+				<td>[[${info.bookPublisher}]]</td>
+				<td>[[${info.bookInfo}]]</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</html>
