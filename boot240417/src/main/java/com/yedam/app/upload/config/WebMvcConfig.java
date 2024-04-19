@@ -10,7 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	// 인터셉터 등록
 	// 뷰리졸버 등록
 	// 리소스 핸들링 처리
-	@Value("${file.upload.path}") // application.properties에서 경로 미리 변수로 지정
+	@Value("${file.upload.path}") // application.properties에서 경로 미리 변수로 지정, 환경변수 읽어 들이기
 	private String uploadPath; // 필드에 value값 들어감
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) { // 메소드 체이닝 >> 계속 추가 가능
